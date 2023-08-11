@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Order Form</title>
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+    body {
+        font-family: 'Roboto Condensed', sans-serif;
+        color: #262626;
+        margin: 5% 0;
+    }
+    .container {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    @media (min-width: 1200px)
+    {
+        .container {
+            max-width: 1140px;
+        }
+    }
+    .d-flex {
+        display: flex;
+        flex-direction: row;
+        background: #f6f6f6;
+        border-radius: 0 0 5px 5px;
+        padding: 25px;
+    }
+    form {
+        flex: 4;
+    }
+    .Yorder {
+        flex: 2;
+    }
+    .title {
+        background: -webkit-gradient(linear, left top, right bottom, color-stop(0, #5195A8), color-stop(100, #70EAFF));
+        background: -moz-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+        background: -ms-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+        background: -o-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+        background: linear-gradient(to bottom right, #5195A8 0%, #70EAFF 100%);
+        border-radius: 5px 5px 0 0 ;
+        padding: 20px;
+        color: #f6f6f6;
+    }
+    h2 {
+        margin: 0;
+        padding-left: 15px;
+    }
+    .required {
+        color: red;
+    }
+    label {
+        display: block;
+        margin: 15px;
+    }
+    table {
+        display: block;
+        margin: 15px;
+    }
+    label>span {
+        float: left;
+        width: 25%;
+        margin-top: 12px;
+        padding-right: 10px;
+    }
+    input[type="email"]
+    {
+        width: 70%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dadada;
+        color: #888;
+    }
+    select
+    {
+        width: 70%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dadada;
+        color: #888;
+    }
+    input[type="text"] {
+        width: 70%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dadada;
+        color: #888;
+    }
+    input[type="tel"]
+    {
+        width: 70%;
+        height: 30px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dadada;
+        color: #888;
+    }
+    select {
+        width: 72%;
+        height: 45px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+    .Yorder {
+        margin-top: 15px;
+        height: 600px;
+        padding: 20px;
+        border: 1px solid #dadada;
+    }
+    table {
+        margin: 0;
+        padding: 0;
+    }
+    th {
+        border-bottom: 1px solid #dadada;
+        padding: 10px 0;
+    }
+    tr>td:nth-child(1) {
+        text-align: left;
+        color: #2d2d2a;
+    }
+    tr>td:nth-child(2) {
+        text-align: right;
+        color: #52ad9c;
+    }
+    td {
+        border-bottom: 1px solid #dadada;
+        padding: 25px 25px 25px 0;
+    }
+    p {
+        display: block;
+        color: #888;
+        margin: 0;
+        padding-left: 25px;
+    }
+    .Yorder>div {
+        padding: 15px 0;
+    }
+    button {
+        width: 100%;
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 30px;
+        background: #52ad9c;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    button:hover {
+        cursor: pointer;
+        background: #428a7d;
+    }
+</style>
+
+<body>
+
+<div class="container">
+
+    <div class="title">
+        <h2> Smart Phones order Form </h2>
+    </div>
+    <div class="d-flex">
+        <form th:action="@{/order/save}" th:object="${order}"
+              method="POST">
+            <label>
+                <span class="fname"> First Name <span class="required"> * </span></span>
+                <input type="text"  th:field="*{firstName}">
+            </label>
+            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}">Invalid Name</p>
+
+
+            <label>
+                <span class="lname"> Last Name <span class="required"> * </span> </span>
+                <input type="text"  th:field="*{lastName}">
+            </label>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}">Invalid Name</p>
+
+
+            <label>
+                <span> Middle Name </span>
+                <input type="text"  th:field="*{middleName}">
+            </label>
+
+
+            <label>
+                <span> Email Address <span class="required">*</span></span>
+                <input type="email" th:field="*{email}">
+            </label>
+            <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}">Invalid Name</p>
+
+
+            <label>
+                <span> Area Code <span class="required">*</span> </span>
+                <input type="text"  th:field="*{codeArea}">
+            </label>
+            <p th:if="${#fields.hasErrors('codeArea')}" th:errorclass="error" th:errors="*{codeArea}">Invalid Name</p>
+
+            <label>
+                <span> Phone Number <span class="required">*</span> </span>
+                <input type="text"  th:field="*{phone}">
+            </label>
+            <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}">Invalid Name</p>
+
+            <label>
+                <span> Street Address <span class="required">*</span> </span>
+                <input type="text" name="cn" th:field="*{address}">
+            </label>
+            <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}">Invalid Name</p>
+
+            <label>
+                <span> Street Address Line 2 </span>
+                <input type="text" name="cn" th:field="*{secondAddress}">
+            </label>
+
+
+            <label>
+                <span> City <span class="required">*</span> </span>
+                <input type="text"  th:field="*{city}">
+            </label>
+            <p th:if="${#fields.hasErrors('city')}" th:errorclass="error" th:errors="*{city}">Invalid Name</p>
+
+            <label>
+                <span> State/Province <span class="required">*</span> </span>
+                <input type="text" name="cn" th:field="*{state}">
+            </label>
+            <p th:if="${#fields.hasErrors('state')}" th:errorclass="error" th:errors="*{state}">Invalid Name</p>
+
+
+            <label>
+                <span> Postal/Zip Code <span class="required">*</span> </span>
+                <input type="text" name="cn" th:field="*{zipCode}">
+            </label>
+            <p th:if="${#fields.hasErrors('zipCode')}" th:errorclass="error" th:errors="*{zipCode}">Invalid Name</p>
+
+
+
+            <label>
+                <span>Country <span class="required">*</span></span>
+                <select name="selection" th:field="*{country}">
+                    <option value="select"> Select a country... </option>
+                    <option value="AFG">Afghanistan</option>
+                    <option value="ALA">?land Islands</option>
+                    <option value="ALB">Albania</option>
+                    <option value="DZA">Algeria</option>
+                    <option value="ASM">American Samoa</option>
+                    <option value="AND">Andorra</option>
+                    <option value="BOL">Bolivia</option>
+                    <option value="BES">Bonaire</option>
+                    <option value="BIH">Bosnia</option>
+                    <option value="BWA">Botswana</option>
+                    <option value="BVT">Bouvet Island</option>
+                    <option value="BRA">Brazil</option>
+                    <option value="CUB">Cuba</option>
+                    <option value="CUW">Cura?ao</option>
+                    <option value="CYP">Cyprus</option>
+                    <option value="CZE">Czech Republic</option>
+                    <option value="EST">Estonia</option>
+                    <option value="ETH">Ethiopia</option>
+                    <option value="FLK">Falkland Islands (Malvinas)</option>
+                    <option value="LTU">Lithuania</option>
+                    <option value="LUX">Luxembourg</option>
+                    <option value="MAC">Macao</option>
+                    <option value="MKD">Macedonia, the former Yugoslav Republic of</option>
+                    <option value="MDG">Madagascar</option>
+                    <option value="MCO">Monaco</option>
+                    <option value="MNG">Mongolia</option>
+                    <option value="MNE">Montenegro</option>
+                    <option value="MSR">Montserrat</option>
+                    <option value="MAR">Morocco</option>
+                    <option value="NPL">Nepal</option>
+                    <option value="BLM">Saint Barth?lemy</option>
+                    <option value="SHN">Saint Helena, Ascension and Tristan da Cunha</option>
+                    <option value="KNA">Saint Kitts and Nevis</option>
+                    <option value="LCA">Saint Lucia</option>
+                    <option value="MAF">Saint Martin (French part)</option>
+                    <option value="SPM">Saint Pierre and Miquelon</option>
+                    <option value="VCT">Saint Vincent and the Grenadines</option>
+                    <option value="VNM">Viet Nam</option>
+                    <option value="VGB">Virgin Islands, British</option>
+                    <option value="VIR">Virgin Islands, U.S.</option>
+                    <option value="WLF">Wallis and Futuna</option>
+                    <option value="ESH">Western Sahara</option>
+                    <option value="YEM">Yemen</option>
+                    <option value="ZMB">Zambia</option>
+                    <option value="ZWE">Zimbabwe</option>
+                </select>
+            </label>
+            <p th:if="${#fields.hasErrors('country')}" th:errorclass="error" th:errors="*{country}">Invalid Name</p>
+
+
+            <label>
+                <span>Phone Brand  <span class="required">*</span></span>
+                <select name="selection" th:field="*{brand}" id="sel1" onchange="giveSelection(this.value)">
+                    <option value="select"> Select a Brand... </option>
+                    <option value="iphone">iPhone</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="google">Google</option>
+                    <option value="black">Black berry </option>
+
+                </select>
+            </label>
+            <p th:if="${#fields.hasErrors('brand')}" th:errorclass="error" th:errors="*{brand}">Invalid Name</p>
+
+
+            <label>
+                <span>Phone Model <span class="required">*</span></span>
+                <select name="selection" th:field="*{model}" id="sel2">
+                    <option value=""> Select a Model... </option>
+
+                    <option value="Iphone X" data-option="iphone">IPhone X  : 200 CAD</option>
+
+                    <option value="Iphone 11" data-option="iphone">iPhone 11  : 300 CAD</option>
+
+                    <option value="Iphone 11 Pro" data-option="iphone">iPhone 11 Pro : 400 CAD</option>
+
+                    <option value="Samsung S21" data-option="samsung">Samsung S21 : 200 CAD</option>
+
+                    <option value="Samsung S22" data-option="samsung">Samsung S22 : 300 CAD</option>
+
+
+                </select>
+            </label>
+            <p th:if="${#fields.hasErrors('model')}" th:errorclass="error" th:errors="*{model}">Invalid Name</p>
+
+
+            <label>
+                <span> Quantity <span class="required">*</span> </span>
+                <input type="number"  th:field="*{quantity}">
+            </label>
+            <p th:if="${#fields.hasErrors('quantity')}" th:errorclass="error" th:errors="*{quantity}">Invalid Name</p>
+
+            <button type="submit" class="btn btn-info col-2"> Create Order</button>
+
+        </form>
+    </div>
+
+        <style>
+        .error {
+            color: red;
+        }
+    </style>
+    <hr>
+
+    <a th:href = "@{/}"> Back to Smart Phones  List</a>
+</div>
+
+<script>
+    var sel1 = document.querySelector('#sel1');
+    var sel2 = document.querySelector('#sel2');
+    var options2 = sel2.querySelectorAll('option');
+
+    function giveSelection(selValue) {
+        sel2.innerHTML = '';
+        for(var i = 0; i < options2.length; i++) {
+            if(options2[i].dataset.option === selValue) {
+                sel2.appendChild(options2[i]);
+            }
+        }
+    }
+
+    giveSelection(sel1.value);
+</script>
+</body>
+</html>
